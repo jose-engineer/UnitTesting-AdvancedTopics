@@ -21,12 +21,12 @@ describe('HeroesComponent', () => {
   describe('delete', () => {
 
     it('should remove the indicated hero from the heroes list', () => {
-      mockHeroService.deleteHero.and.returnValue(of(true))
+      mockHeroService.deleteHero.and.returnValue(of(true)) //"of" create an observable so the mock object return an observable when deleteHero is called
       component.heroes = HEROES;
 
       component.delete(HEROES[2]);
 
-      expect(component.heroes.length).toBe(2);
+      expect(component.heroes.length).toBe(2); //test if the state of the component has change (state-based test)
     })
 
     it('should call deleteHero', () => {
@@ -35,7 +35,8 @@ describe('HeroesComponent', () => {
 
       component.delete(HEROES[2]);
 
-      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(HEROES[2]);
+      //expect(mockHeroService.deleteHero).toHaveBeenCalled();
+      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(HEROES[2]); //test if delete hero was called with the correct parameter (interaction test)
     })
   })
 })
