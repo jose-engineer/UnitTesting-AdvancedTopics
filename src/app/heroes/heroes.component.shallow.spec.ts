@@ -15,10 +15,10 @@ describe('HeroesComponent (shallow tests)', () => {
     selector: 'app-hero',
     template: '<div></div>',
   })
-  class FakeHeroComponent {
+  class FakeHeroComponent { //create a fake chlid component to replace the child component
     @Input() hero: Hero;
     // @Output() delete = new EventEmitter();
-  }  
+  }
 
   beforeEach(() => {
     HEROES = [
@@ -26,7 +26,7 @@ describe('HeroesComponent (shallow tests)', () => {
       {id:2, name: 'Wonderful Woman', strength: 24},
       {id:3, name: 'SuperDude', strength: 55}
     ]
-    mockHeroService = jasmine.createSpyObj(['getHeroes', 'addHero', 'deleteHero']);
+    mockHeroService = jasmine.createSpyObj(['getHeroes', 'addHero', 'deleteHero']);//mock service/object
 
     TestBed.configureTestingModule({
       declarations: [
@@ -34,7 +34,7 @@ describe('HeroesComponent (shallow tests)', () => {
         FakeHeroComponent
       ],
       providers: [
-        { provide: HeroService, useValue: mockHeroService }
+        { provide: HeroService, useValue: mockHeroService } //when someone asks for "HeroService" use "mockHeroService" object
       ],
     //   schemas: [NO_ERRORS_SCHEMA]
     })
@@ -43,7 +43,7 @@ describe('HeroesComponent (shallow tests)', () => {
 
   it('should set heroes correctly from the service', () => {
     mockHeroService.getHeroes.and.returnValue(of(HEROES))
-    fixture.detectChanges();
+    fixture.detectChanges(); //fires ngOnInit(), change detection causes lifecycle events to run
 
     expect(fixture.componentInstance.heroes.length).toBe(3);
   });
